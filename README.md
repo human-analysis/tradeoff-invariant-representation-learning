@@ -28,7 +28,7 @@ If you think this work is useful to your research, please cite:
 
 ### Setup
 First, you need to download PyTorchNet by calling the following command:
-> git clone --recursive https://github.com/human-analysis/kernel-adversarial-representation-learning.git
+> git clone https://github.com/human-analysis/characterizing-invariant-representation-tradeoff.git
 
 ### Requirements
 
