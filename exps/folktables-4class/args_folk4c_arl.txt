@@ -1,0 +1,87 @@
+[Arguments]
+
+# project options
+port = 8097
+env = main
+same_env = Yes
+save_results = No
+
+project_name = Folk-ARL-4C
+result_subdir = Folk-ARL-4C
+monitor={"metric": "loss", "decreasing": 1}
+
+
+# model options
+model_type = EncDecFolk
+model_options = {"ndim":57, "r":4, "nclasses":4, "hdl": 128}
+# model_options = {"ndim":56, "r":4, "nclasses":4, "hdl": 128}
+age_remove = no
+model_adv_type = AdvCelebA
+model_adv_options = {"r":4, "nclasses":1, "hdl": 64}
+r = 4
+
+# dataset = FeatureLoaderFolk
+dataset = FeatureLoaderFolk_embedding_4class
+
+
+features_path = ./data/folktables-4class
+
+num_sensitive_attrs = 95
+
+# model options
+precision = 32
+batch_size_test = 128
+batch_size_train = 128
+
+
+# EarlyStopping
+EarlyStopping=False
+earlystop_options = {"monitor":"val_loss", "min_delta":0.001, "patience":3, "verbose":0, "mode":"min"}
+
+lam = 0.0001
+loss_type = Classification
+adv_loss_type = Regression
+loss_options = {}
+evaluation_type = Accuracy
+evaluation_options = {}
+
+
+control_type = ARLFolk_age
+
+kernel_type = GaussianKernel
+
+gaussian_sigma = GaussianSigma
+
+
+kernel_labels = yes
+
+
+fairness_type1 = DP_SingleLabel
+fairness_options1 = {}
+
+tau = 0.0
+control_pretrain=False
+
+manual_seed = 0
+nepochs = 40
+nepochs_arl = 1
+
+check_val_every_n_epochs = 20
+
+optim_method = AdamW
+#learning_rate = 3e-5
+learning_rate = 5e-3
+adv_learning_rate = 3e-4
+
+# optim_options = {"momentum": 0.9, "weight_decay": 1e-8}
+optim_options = {"weight_decay": 2e-5}
+
+scheduler_method = StepLR
+#scheduler_options = {"step_size": 1, "gamma": 0.5}
+scheduler_options = {"step_size": 2, "gamma": 0.95}
+# adv_scheduler_options = {"step_size": 2, "gamma": 0.95}
+
+
+# cpu/gpu settings
+ngpu = 1
+nthreads = 4

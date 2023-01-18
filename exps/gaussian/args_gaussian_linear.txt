@@ -1,0 +1,100 @@
+[Arguments]
+
+port = 8097
+env = main
+
+# precision = 32
+
+same_env = Yes
+save_results = No
+
+# project options
+project_name=Gaussian-Linear
+result_subdir=Gaussian-Linear
+monitor={"metric": "loss", "decreasing": 1}
+
+# dataset options
+dataset=Gaussian4d
+
+noise = 0.005
+feature_path = ./data/gaussian
+dataset_type = Gaussian
+dataset_options = {"nsamples": 6000}
+
+# model options
+batch_size_test = 6000
+
+batch_size_train = 500
+model_type = Gaussian
+
+model_options = {"nout":16, "r":15, "hdl":15}
+r = 15
+kernel_reg = 1e-1
+drff = 100
+
+
+control_type = GaussianKernelndRFFClassification
+centering = False
+# centering = True
+kernel_type = GaussianKernel
+gaussian_sigma = GaussianSigma
+# kernel_labels = no
+kernel_labels = no
+kernel_semantic = no
+kernel_data = yes
+
+
+
+sigma_x = 1.0
+sigma_y = 1.0
+sigma_s = 1.0
+
+sigma_x_ratio = 1
+sigma_y_ratio = 1.0
+sigma_s_ratio = 1.0
+
+thresh_type = 0
+# thresh_type = 1
+cholesky_factor = 2
+
+# loss options
+loss_type = Classification
+loss_options={}
+evaluation_type = Accuracy
+evaluation_options={}
+tau = 0.0
+lam = 2e-4
+# lam = 0
+# lam = 0.9999
+
+# fairness_type = HGRKDE
+# fairness_type = DEP
+# fairness_type = DEPHSIC
+fairness_type = DEPKCC
+# fairness_type1 = MI
+fairness_options = {}
+
+manual_seed = 0
+
+nepochs = 1000
+
+check_val_every_n_epochs = 500
+
+control_epoch = 0
+
+optim_method = AdamW
+learning_rate = 1e-3
+
+# optim_options = {"momentum": 0.9, "weight_decay": 2e-5}
+optim_options = {"weight_decay": 2e-5}
+
+
+scheduler_method = StepLR
+scheduler_options = {"step_size": 300, "gamma": 0.95}
+
+#scheduler_method = CosineAnnealingLR
+#scheduler_options = {"T_max": 5}
+
+# cpu/gpu settings
+ngpu = 1
+nthreads = 4

@@ -1,0 +1,105 @@
+[Arguments]
+
+# project options
+port = 8097
+env = main
+same_env = Yes
+save_results = No
+
+project_name = CelebA-ARL
+result_subdir = CelebA-ARL
+monitor={"metric": "loss", "decreasing": 1}
+
+
+# model options
+model_type = EncDecCelebA
+model_options = {"ndim":256, "r":1, "nclasses":2, "hdl": 128}
+model_adv_type = AdvCelebA
+model_adv_options = {"r":1, "nclasses":4, "hdl":128}
+r = 1
+
+dataset = FeatureLoaderCelebAHQ
+
+features_path = ./data/celeba
+#features_path = /research/hal-datastage/datasets/processed/CelebA-Features/celeba-features-r256-HighCheekbones_01-12-2022_07-24-36/features
+
+#target_attr = 9
+target_attr = 19
+sensitive_attr = 20, 39
+
+#resolution_high = 256
+#resolution_wide = 256
+
+# model options
+precision = 32
+batch_size_test = 128
+batch_size_train = 128
+model_pre_type = preactresnet18
+#resume = ./server/2021-07-13_18-11-05_0.0_CelebA_0/main.ckpt
+#model_pre_options = {"nfilters": 32, "r": 2, "nclasses":2}
+
+
+# EarlyStopping
+EarlyStopping=False
+earlystop_options = {"monitor":"val_loss", "min_delta":0.001, "patience":3, "verbose":0, "mode":"min"}
+
+lam = 0.0001
+loss_type = Classification
+adv_loss_type = Classification
+loss_options = {}
+evaluation_type = Accuracy
+evaluation_options = {}
+
+
+#control_type = ARLCelebA_nncc
+control_type = ARLCelebA
+
+
+kernel_type = GaussianKernel
+
+gaussian_sigma = GaussianSigma
+
+
+kernel_labels = yes
+sigma_x = 10
+sigma_y = 1
+sigma_s = 1
+cholesky_factor = 1
+drff = 2000
+
+fairness_type = DEPKCC
+fairness_options = {}
+
+fairness_type1 = DP_SingleLabel
+fairness_options1 = {}
+
+check_val_every_n_epochs = 10
+
+tau = 0.0
+control_pretrain=False
+
+manual_seed = 0
+nepochs = 30
+nepochs_arl = 1
+# nepochs_nncc = 1
+num_init_epochs = 0
+num_adv_train_iters = 1
+
+#num_init_epochs = 3
+#num_adv_train_iters = 10
+
+optim_method = AdamW
+learning_rate = 1e-4
+#learning_rate = 3e-4
+
+# optim_options = {"momentum": 0.9, "weight_decay": 1e-8}
+optim_options = {"weight_decay": 2e-5}
+
+scheduler_method = StepLR
+#scheduler_options = {"step_size": 1, "gamma": 0.5}
+scheduler_options = {"step_size": 1, "gamma": 0.8}
+
+
+# cpu/gpu settings
+ngpu = 1
+nthreads = 2

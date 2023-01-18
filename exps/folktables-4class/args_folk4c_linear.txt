@@ -1,0 +1,100 @@
+[Arguments]
+
+port = 8097
+env = main
+same_env = Yes
+save_results = No
+
+# project options
+project_name=Folk-Linear-4C
+result_subdir = Folk-Linear-4C
+monitor={"metric": "loss", "decreasing": 1}
+
+# dataset options
+# dataset = FeatureLoaderFolk
+dataset = FeatureLoaderFolk_embedding_4class
+
+features_path = ./data/folktables-4class
+
+
+num_sensitive_attrs = 95
+age_remove = no
+
+# model options
+precision = 32
+batch_size_test = 128
+batch_size_train = 128
+
+
+model_type = DecFolk
+model_options = {"ndim": 3, "nclasses":4}
+r = 3
+
+
+#drff = 200
+drff = 2000
+#drff = 5000
+#drff = 2500
+
+
+control_type = FolkKernelRFF
+centering = False
+kernel_type = GaussianKernel
+gaussian_sigma = GaussianSigma
+
+kernel_labels = no
+kernel_semantic = no
+kernel_data = yes
+# kernel_options={"sigma": 0.1}
+
+
+# sigma_x = 19
+# sigma_x = 5.4
+sigma_x = 5.4
+sigma_y = 1.0
+sigma_s = 17
+
+cholesky_factor = 2
+
+# loss options
+loss_type = Classification
+loss_options={}
+evaluation_type = Accuracy
+evaluation_options={}
+
+
+tau = 0.0
+lam = 1e-5
+# lam = 1e-4
+# lam = 0
+# lam = 0.9999
+
+
+fairness_type1 = DP_SingleLabel
+fairness_options1 = {}
+
+manual_seed = 0
+
+nepochs = 40
+
+check_val_every_n_epochs = 20
+
+control_epoch = 0
+
+optim_method = AdamW
+learning_rate = 5e-3
+
+# optim_options = {"momentum": 0.9, "weight_decay": 2e-5}
+optim_options = {"weight_decay": 2e-5}
+
+
+scheduler_method = StepLR
+#scheduler_options = {"step_size": 1, "gamma": 0.7}
+
+#scheduler_options = {"step_size": 2, "gamma": 0.7}
+scheduler_options = {"step_size": 2, "gamma": 0.95}
+
+
+# cpu/gpu settings
+ngpu = 1
+nthreads = 1

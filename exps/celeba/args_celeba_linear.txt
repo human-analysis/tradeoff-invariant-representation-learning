@@ -1,0 +1,95 @@
+[Arguments]
+
+port = 8097
+env = main
+same_env = Yes
+save_results = No
+
+result_subdir = CelebA-linear
+# project options
+project_name=CelebALinear
+monitor={"metric": "loss", "decreasing": 1}
+
+# dataset options
+dataset = FeatureLoaderCelebAHQ
+features_path = ./data/celeba
+# features_path = /research/hal-datastage/datasets/processed/CelebA-Features/celeba-features-r256-HighCheekbones_01-12-2022_07-24-36/features
+
+#target_attr = 9
+target_attr = 19
+sensitive_attr = 20, 39
+
+# model options
+precision = 32
+batch_size_test = 128
+batch_size_train = 128
+
+model_type = DecCelebA
+model_options = {"ndim": 1, "nclasses":2}
+r = 1
+#model_options = {"ndim": 64, "nclasses":2}
+#r = 64
+
+
+#drff = 256
+#drff = 2000
+drff = 1000
+#drff = 2500
+
+
+control_type = CelebAKernelRFF
+centering = False
+kernel_type = GaussianKernel
+gaussian_sigma = GaussianSigma
+kernel_labels = no
+kernel_semantic = no
+kernel_data = yes
+# kernel_options={"sigma": 0.1}
+
+sigma_x = 65
+sigma_y = 1.0
+sigma_s = 1.0
+
+cholesky_factor = 2
+
+# loss options
+loss_type = Classification
+loss_options={}
+evaluation_type = Accuracy
+evaluation_options={}
+
+
+tau = 0.0
+# lam = 5e-5
+lam = 1
+# lam = 0.9999
+
+
+fairness_type1 = DP_SingleLabel
+fairness_options1 = {}
+
+manual_seed = 0
+
+nepochs = 30
+nepochs_nncc = 1
+
+check_val_every_n_epochs = 10
+
+control_epoch = 0
+
+optim_method = AdamW
+learning_rate = 5e-3
+
+# optim_options = {"momentum": 0.9, "weight_decay": 2e-5}
+optim_options = {"weight_decay": 2e-5}
+
+
+scheduler_method = StepLR
+#scheduler_options = {"step_size": 1, "gamma": 0.7}
+scheduler_options = {"step_size": 2, "gamma": 0.85}
+#scheduler_options = {"step_size": 1, "gamma": 0.9}
+
+
+# cpu/gpu settings
+ngpu = 1
+nthreads = 4

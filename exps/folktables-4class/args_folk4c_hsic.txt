@@ -1,0 +1,75 @@
+[Arguments]
+
+port = 8097
+env = main
+same_env = Yes
+save_results = No
+
+# project options
+project_name = Folk-HSIC-4C
+result_subdir = Folk-HSIC-4C
+
+monitor={"metric": "loss", "decreasing": 1}
+
+
+# dataset options
+dataset = FeatureLoaderFolk_embedding_4class
+features_path = ./data/folktables-4class
+num_sensitive_attrs = 95
+
+# model options
+batch_size_test = 128
+batch_size_train = 128
+
+model_type = EncDecFolk
+model_options = {"ndim":57, "r":4, "nclasses":4, "hdl": 128}
+age_remove = no
+r = 4
+model_adv_type = AdvCelebA
+model_adv_options = {"r":4, "nclasses":1, "hdl": 128}
+
+control_type = FolkHSIC
+# control_options = {"type":"conditional"}
+
+kernel_type = GaussianKernel
+kernel_labels = yes
+# kernel_options={"sigma": 0.1}
+
+
+# loss options
+loss_type = Classification
+loss_options={}
+evaluation_type = Accuracy
+evaluation_options={}
+
+
+tau = 0.0
+
+drff = 1000
+gaussian_sigma = GaussianSigma
+
+
+fairness_type1 = DP_SingleLabel
+fairness_options1 = {}
+
+manual_seed = 0
+
+nepochs = 40
+
+check_val_every_n_epochs = 20
+control_epoch = 0
+
+optim_method = AdamW
+learning_rate = 5e-3
+
+# optim_options = {"momentum": 0.9, "weight_decay": 2e-5}
+optim_options = {"weight_decay": 2e-5}
+
+
+scheduler_method = StepLR
+scheduler_options = {"step_size": 2, "gamma": 0.95}
+
+
+# cpu/gpu settings
+ngpu = 1
+nthreads = 4

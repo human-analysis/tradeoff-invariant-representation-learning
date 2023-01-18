@@ -1,0 +1,79 @@
+[Arguments]
+
+port = 8097
+env = main
+same_env = Yes
+save_results = No
+
+# project options
+project_name = Folk-HSIC
+result_subdir = Folk-HSIC
+
+monitor={"metric": "loss", "decreasing": 1}
+
+
+# dataset options
+# dataset = FeatureLoaderFolk
+dataset = FeatureLoaderFolk_embedding
+features_path = ./data/folktables
+# features_path=/research/hal-datastage/datasets/processed/folktables/states/WA/Age/Emp
+num_sensitive_attrs = 95
+
+# model options
+batch_size_test = 128
+batch_size_train = 128
+
+model_type = EncDecFolk
+model_options = {"ndim":57, "r":2, "nclasses":2, "hdl": 128}
+# model_options = {"ndim":56, "r":2, "nclasses":2, "hdl": 128}
+age_remove = no
+# model_options = {"ndim":16, "r":2, "nclasses":2, "hdl": 128}
+r = 2
+model_adv_type = AdvCelebA
+model_adv_options = {"r":2, "nclasses":1, "hdl": 128}
+
+control_type = FolkHSIC
+# control_options = {"type":"conditional"}
+
+kernel_type = GaussianKernel
+kernel_labels = yes
+# kernel_options={"sigma": 0.1}
+
+
+# loss options
+loss_type = Classification
+loss_options={}
+evaluation_type = Accuracy
+evaluation_options={}
+
+
+tau = 0.0
+
+drff = 1000
+gaussian_sigma = GaussianSigma
+
+
+fairness_type1 = DP_SingleLabel
+fairness_options1 = {}
+
+manual_seed = 0
+
+nepochs = 40
+
+check_val_every_n_epochs = 20
+control_epoch = 0
+
+optim_method = AdamW
+learning_rate = 5e-3
+
+# optim_options = {"momentum": 0.9, "weight_decay": 2e-5}
+optim_options = {"weight_decay": 2e-5}
+
+
+scheduler_method = StepLR
+scheduler_options = {"step_size": 2, "gamma": 0.95}
+
+
+# cpu/gpu settings
+ngpu = 1
+nthreads = 4
