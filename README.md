@@ -140,5 +140,5 @@ python main.py --args exps/folktables-4class/args_folk4c_arl.txt --tau=0.5
 python main.py --args exps/folktables-4class/args_folk4c_hsic.txt --tau=0.5
 ~~~~
 
-### Effect of Semantic Attribute (Age) Removal on Folktables Dataset
+### Effect of Semantic Attribute (Age) Removal on 2018-WA Census Data
 ![plot](./images/folk-age-removed-all.png) ![plot](./images/folk-age-removed-ours.png)
