@@ -1,4 +1,4 @@
-name: kerneltopt
+name: ktopt
 channels:
   - pytorch
   - anaconda
