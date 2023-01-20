@@ -1,4 +1,4 @@
-name: sepehr
+name: ktopt
 channels:
   - pytorch
   - anaconda
