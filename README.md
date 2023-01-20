@@ -32,8 +32,9 @@ If you think this work is useful to your research, please cite:
 
 ### Setup
 First, you need to download PyTorchNet by calling the following command:
-> git clone https://github.com/human-analysis/tradeoff-invariant-representation-learning.git
-
+~~~~
+git clone https://github.com/human-analysis/tradeoff-invariant-representation-learning.git
+~~~~
 ### Requirements
 
 1. `python 3.8.5`
