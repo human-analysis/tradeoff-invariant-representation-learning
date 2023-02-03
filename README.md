@@ -31,25 +31,37 @@ If you think this work is useful to your research, please cite:
 **Link** to the paper: https://hal.cse.msu.edu/papers/characterizing-trade-off-invariant-representation-learning/
 
 ### Setup
-First, you need to download PyTorchNet by calling the following command:
+
+First, clone the repository by calling the following command:
 ~~~~
 git clone https://github.com/human-analysis/tradeoff-invariant-representation-learning.git
 ~~~~
+Download data (about 1GB) used in the paper:
+
+```
+cd tradeoff-invariant-representation-learning
+wget http://hal.cse.msu.edu/assets/data/papers/2022-tmlr-tradeoff-invariant-representation-learning.zip
+unzip 2022-tmlr-tradeoff-invariant-representation-learning.zip
+rm -rf 2022-tmlr-tradeoff-invariant-representation-learning.zip
+```
+
 ### Requirements
 
 1. `python 3.8.5`
 2. `pyTorch 1.10.0`
 3. `pytorch-lightning 1.4.5`
-4. Check `requirements.yml` for detailed dependencies. To install the dependencies completely in a new conda
-environment, you can run `conda env create -f requirements.yml` command. 
+4. `wget`
+5. Check `requirements.yml` for detailed dependencies. To install the dependencies completely in a new conda
+  environment, you can run `conda env create -f requirements.yml` command. 
 
 ### Commands to Reproduce Results in Paper
+
 Set the trade-off parameter `tau` between zero and one, where `tau` equal to zero correspond to standard representation
 learning with  no invariance constraint and `tau` approaching one corresponds to exact invariance. In the the following
 commands we let `tau=0.5`.
 
+#### Toy Gaussian Dataset
 
-#### Toy Gaussian Dataset 
 ![plot](./images/gaussian-kcc-accuracy.png)
 
 ###### Our K-T_Opt approach
